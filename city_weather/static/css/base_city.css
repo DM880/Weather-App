@@ -6,20 +6,111 @@ html, body{
 #title{
   margin: 0;
   font-family: 'Bebas Neue', cursive;
-  font-size: 80px;
+  font-size: 65px;
   text-align: left;
   letter-spacing: 5px;
-  color: red;
+  color: #FFFFFF;
   padding-left: 10px;
+  text-decoration: none;
+  transition : color 500ms ease-out;
+}
+
+#title:hover{
+  color: #FF2442;
+}
+
+#latest{
+  margin: 0;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 60px;
+  float: right;
+  letter-spacing: 5px;
+  color: #FF2442;
+  padding-right: 10px;
+  transition : color 500ms ease-out;
+}
+
+#latest:hover{
+  color: #FFFFFF;
 }
 
 .top-container{
-  height: 100px;
   width: 100%;
-  background-color: blue;
+  height: 15vh;
 }
 
 .enter-data{
-  padding-top: 150px;
+   height: 85vh;
   text-align: center;
+}
+
+.city-text{
+  margin-top: 150px;
+  border-radius: 8px;
+  border: 4px solid #5C7AEA;
+  height: 50px;
+  width: 500px;
+  padding: 5px;
+  font-family:'Roboto',sans-serif;
+  font-size: 30px;
+}
+
+.city-text:focus{
+  border: 4px solid #FEC260;
+  outline: none;
+  -webkit-transition : border 700ms ease-out;
+  -moz-transition : border 700ms ease-out;
+  -o-transition : border 700ms ease-out;
+  transition : border 700ms ease-out;
+}
+
+.box{
+  width: 250px;
+  height: auto;
+  margin-top: 100px;
+  font-family: 'Roboto',sans-serif;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  background-color: white;
+  border-radius: 15px;
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+  margin-left: 40%;
+  margin-right: 40%;
+}
+
+.media-left{
+  text-align:center;
+}
+
+span{
+  padding: 15px;
+  color: white;
+}
+
+.img-weather{
+  height: 70px;
+  width: 70px;
+}
+
+.city-date, .city-des{
+  font-size: 20px;
+}
+
+.btn{
+  background-color: #5C7AEA;
+  border-color: #5C7AEA;
+  transition : border 400ms ease-out;
+  transition : background-color 400ms ease-out;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.btn:hover{
+  background-color: #FEC260;
+  border-color: #FEC260;
+  color: #FF2442;
+  font-weight: bold;
+  font-size: 18px;
+
 }

@@ -1,48 +1,29 @@
-<!DOCTYPE html>
-{% load static %}
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Weather App</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css'>
-        <link rel="stylesheet" href="{% static 'css/base_city.css' %}">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+{% extends 'base_city.html' %}
+{% block title %}Weather History Search{% endblock %}
 
-    </head>
-    <body>
 
-    <div class="m-container">
-      <div class="top-container">
-        <h1 id="title">WEATHER APP</h1>
-      </div>
-</div>
-
+{% block content %}
 {% for city in cities %}
 
 <div class="box">
     <article class="media">
         <div class="media-left">
-            <figure class="image is-50x50">
-                <img src="http://openweathermap.org/img/w/{{ city.icon }}.png" alt="Image">
-            </figure>
+                <img class="img-weather" src="http://openweathermap.org/img/w/{{ city.icon }}.png" alt="Image">
         </div>
         <div class="media-content">
             <div class="content">
                 <p>
-                    <span class="title">{{ city.city|title }}</span>
+                    <span class="city-n">{{ city.city|title }}</span>
                     <br>
-                    <span class="subtitle">{{ city.temperature }}° F</span>
-                    <br> {{ city.description }}
+                    <span class="city-temp">{{ city.temperature }}° C</span>
                     <br>
-                    {{ city.searched }}
+                    <span class="city-des">{{ city.description }}</span>
+                    <br>
+                    <span class="city-date">{{ city.searched }}</span>
                 </p>
             </div>
         </div>
     </article>
 </div>
 {% endfor %}
-    </body>
-</html>
+{% endblock %}

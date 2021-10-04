@@ -4,9 +4,10 @@ from django.urls import reverse
 from .models import *
 from decouple import config
 
+
 api_key = config("API_KEY")
 
-url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=' + api_key
+url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=' + api_key
 
 # Create your views here.
 
@@ -14,20 +15,40 @@ def base_city(request):
 
     if request.method == 'POST':
 
-        city = request.POST.get('city')
+        try:
+            city = request.POST['city']
+        except:
+            return redirect('city:base_city')
 
-        city_weather = requests.get(url.format(city)).json()
+        try:
 
-        weather = {
-        'city' : city,
-        'temperature' : city_weather['main']['temp'],
-        'description' : city_weather['weather'][0]['description'],
-        'icon' : city_weather['weather'][0]['icon']
-        }
+            city_weather = requests.get(url.format(city)).json()
 
-        City.objects.create(city_name=city)
+            weather = {
+            'city' : city,
+            'temperature' : city_weather['main']['temp'],
+            'description' : city_weather['weather'][0]['description'],
+            'icon' : city_weather['weather'][0]['icon']
+            }
 
-        context = {'weather': weather}
+            City.objects.create(city_name=city)
+
+            context = {'weather': weather}
+
+            city_history = City.objects.all().order_by("-searched")
+
+            city_count = city_history.count()
+
+            if city_count > 6:
+
+                for n, city in enumerate(city_history):
+
+                    if n > 6:
+
+                        City.objects.filter(city_name= city.city_name).delete()
+
+        except KeyError:
+            return redirect('city:base_city')
 
         return render(request, "base_city.html", context)
 
@@ -36,7 +57,7 @@ def base_city(request):
 
 def latest_search(request):
 
-    cities_history = City.objects.all().order_by('-searched')
+    cities_history = City.objects.all().order_by('-searched')[:7]
 
     cities = []
 
@@ -55,6 +76,5 @@ def latest_search(request):
         cities.append(weather)
 
     cities_datas = {'cities':cities}
-
 
     return render(request, "latest_search.html", cities_datas)
